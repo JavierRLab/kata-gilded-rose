@@ -20,7 +20,7 @@ namespace GildedRoseKata
                     {
                         if (IsNotLegendary(item))
                         {
-                            item.Quality = item.Quality - 1;
+                            DecreaseQuality(item, 1);
                         }
                     }
                 }
@@ -66,13 +66,13 @@ namespace GildedRoseKata
                             {
                                 if (IsNotLegendary(item))
                                 {
-                                    item.Quality = item.Quality - 1;
+                                    DecreaseQuality(item, 1);
                                 }
                             }
                         }
                         else
                         {
-                            item.Quality = item.Quality - item.Quality;
+                            DecreaseQuality(item, item.Quality);
                         }
                     }
                     else
@@ -84,6 +84,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private void DecreaseQuality(Item item, int itemQuality)
+        {
+            item.Quality -= itemQuality;
         }
 
         private void IncreaseQuality(Item item)
