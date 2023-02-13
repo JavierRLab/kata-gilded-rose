@@ -26,30 +26,24 @@ namespace GildedRoseKata
                 }
                 else
                 {
-                    if (IsNotMaxQuality(item))
-                    {
-                        IncreaseQuality(item);
+                        IncreaseQuality(item, 1);
 
                         if (IsConcertTicket(item))
                         {
                             
                             if (item.SellIn < 11)
                             {
-                                if (IsNotMaxQuality(item))
-                                {
-                                    IncreaseQuality(item);
-                                }
+                                    IncreaseQuality(item, 1);
+                                
                             }
 
                             if (item.SellIn < 6)
                             {
-                                if (IsNotMaxQuality(item))
-                                {
-                                    IncreaseQuality(item);
-                                }
+                                    IncreaseQuality(item, 1);
+                                
                             }
                         }
-                    }
+                    
                 }
 
                 DecreaseSellIn(item);
@@ -75,10 +69,9 @@ namespace GildedRoseKata
                     }
                     else
                     {
-                        if (IsNotMaxQuality(item))
-                        {
-                            IncreaseQuality(item);
-                        }
+                        
+                            IncreaseQuality(item, 1);
+                        
                     }
                 }
             }
@@ -117,9 +110,12 @@ namespace GildedRoseKata
             item.Quality -= itemQuality;
         }
 
-        private void IncreaseQuality(Item item)
+        private void IncreaseQuality(Item item, int itemQuality)
         {
-            item.Quality += 1;
+            if (IsNotMaxQuality(item))
+            {
+                item.Quality += itemQuality;
+            }
         }
 
         private static bool IsNotLegendary(Item item)
