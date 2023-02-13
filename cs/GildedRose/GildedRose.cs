@@ -22,43 +22,46 @@ namespace GildedRoseKata
                 if (IsBrie(item))
                 {
                     IncreaseQuality(item, 1);
-                    if(item.SellIn <= 0)
+                    if(IsSellInHasDone(item, 1))
                         IncreaseQuality(item, 1);
 
                     
                 }
                 else if (IsConcertTicket(item))
                 {
-                    IncreaseQuality(item, 1);
-                    if (item.SellIn < 11)
+                    if (IsSellInHasDone(item, 1))
+                        DecreaseQuality(item, item.Quality);
+                    else
                     {
                         IncreaseQuality(item, 1);
-                    }
 
-                    if (item.SellIn < 6)
-                    {
-                        IncreaseQuality(item, 1);
+                        if (IsSellInHasDone(item, 11))
+                        {
+                            IncreaseQuality(item, 1);
+                        }
+
+                        if (IsSellInHasDone(item, 6))
+                        {
+                            IncreaseQuality(item, 1);
+                        }
                     }
                 }
                 else
                 {
                     DecreaseQuality(item, 1);
+                    
+                    if(IsSellInHasDone(item, 1))
+                        DecreaseQuality(item, 1);
                 }
                 
-                if (item.SellIn <= 0 && !IsBrie(item))
-                {
-                    if (IsConcertTicket(item))
-                    {
-                        DecreaseQuality(item, item.Quality);
-                    }
-                    else
-                    {
-                        DecreaseQuality(item, 1);
-                    }
-                }
                 DecreaseSellIn(item);
 
             }
+        }
+
+        private static bool IsSellInHasDone(Item item, int daysLeft)
+        {
+            return item.SellIn < daysLeft;
         }
 
         private bool IsBrie(Item item)
