@@ -14,60 +14,54 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (IsNotBrie(item) && !IsConcertTicket(item))
+                if (IsBrie(item) || IsConcertTicket(item))
                 {
-                            DecreaseQuality(item, 1);
+                    IncreaseQuality(item, 1);
+
+                    if (IsConcertTicket(item))
+                    {
+                        if (item.SellIn < 11)
+                        {
+                            IncreaseQuality(item, 1);
+                        }
+
+                        if (item.SellIn < 6)
+                        {
+                            IncreaseQuality(item, 1);
+                        }
+                    }
                 }
                 else
                 {
-                        IncreaseQuality(item, 1);
-
-                        if (IsConcertTicket(item))
-                        {
-                            
-                            if (item.SellIn < 11)
-                            {
-                                    IncreaseQuality(item, 1);
-                                
-                            }
-
-                            if (item.SellIn < 6)
-                            {
-                                    IncreaseQuality(item, 1);
-                                
-                            }
-                        }
-                    
+                    DecreaseQuality(item, 1);
                 }
 
                 DecreaseSellIn(item);
 
                 if (item.SellIn < 0)
                 {
-                    if (IsNotBrie(item))
+                    if (IsBrie(item))
                     {
-                        if (!IsConcertTicket(item))
-                        {
-                                    DecreaseQuality(item, 1);
-                        }
-                        else
-                        {
-                            DecreaseQuality(item, item.Quality);
-                        }
+                        IncreaseQuality(item, 1);
                     }
                     else
                     {
-                        
-                            IncreaseQuality(item, 1);
-                        
+                        if (IsConcertTicket(item))
+                        {
+                            DecreaseQuality(item, item.Quality);
+                        }
+                        else
+                        {
+                            DecreaseQuality(item, 1);
+                        }
                     }
                 }
             }
         }
 
-        private bool IsNotBrie(Item item)
+        private bool IsBrie(Item item)
         {
-            return item.Name != "Aged Brie";
+            return item.Name == "Aged Brie";
         }
 
         private static bool IsConcertTicket(Item item)
