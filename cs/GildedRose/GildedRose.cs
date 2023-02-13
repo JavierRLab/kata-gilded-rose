@@ -18,9 +18,15 @@ namespace GildedRoseKata
                 {
                     continue;
                 }
-                
-                if(IsBrie(item))
+
+                if (IsBrie(item))
+                {
                     IncreaseQuality(item, 1);
+                    if(item.SellIn <= 0)
+                        IncreaseQuality(item, 1);
+
+                    
+                }
                 else if (IsConcertTicket(item))
                 {
                     IncreaseQuality(item, 1);
@@ -38,17 +44,10 @@ namespace GildedRoseKata
                 {
                     DecreaseQuality(item, 1);
                 }
-
-                DecreaseSellIn(item);
-
-
-                if (item.SellIn < 0)
+                
+                if (item.SellIn <= 0 && !IsBrie(item))
                 {
-                    if (IsBrie(item))
-                    {
-                        IncreaseQuality(item, 1);
-                    }
-                    else if (IsConcertTicket(item))
+                    if (IsConcertTicket(item))
                     {
                         DecreaseQuality(item, item.Quality);
                     }
@@ -57,6 +56,8 @@ namespace GildedRoseKata
                         DecreaseQuality(item, 1);
                     }
                 }
+                DecreaseSellIn(item);
+
             }
         }
 
@@ -83,7 +84,6 @@ namespace GildedRoseKata
         private void DecreaseSellIn(Item item)
         {
             item.SellIn -= 1;
-            
         }
 
         private void DecreaseQuality(Item item, int itemQuality)
