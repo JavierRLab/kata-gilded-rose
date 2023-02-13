@@ -51,10 +51,7 @@ namespace GildedRoseKata
                     }
                 }
 
-                if (IsNotLegendary(item))
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
+                DecreaseSellIn(item);
 
                 if (item.SellIn < 0)
                 {
@@ -83,6 +80,14 @@ namespace GildedRoseKata
                         }
                     }
                 }
+            }
+        }
+
+        private void DecreaseSellIn(Item item)
+        {
+            if (IsNotLegendary(item))
+            {
+                item.SellIn -= 1;
             }
         }
 
