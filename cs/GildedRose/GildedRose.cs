@@ -18,21 +18,21 @@ namespace GildedRoseKata
                 {
                     continue;
                 }
-                if (IsBrie(item) || IsConcertTicket(item))
-                {
+                
+                if(IsBrie(item))
                     IncreaseQuality(item, 1);
-
-                    if (IsConcertTicket(item))
+                else if (IsConcertTicket(item))
+                {
+                    
+                    IncreaseQuality(item, 1);
+                    if (item.SellIn < 11)
                     {
-                        if (item.SellIn < 11)
-                        {
-                            IncreaseQuality(item, 1);
-                        }
+                        IncreaseQuality(item, 1);
+                    }
 
-                        if (item.SellIn < 6)
-                        {
-                            IncreaseQuality(item, 1);
-                        }
+                    if (item.SellIn < 6)
+                    {
+                        IncreaseQuality(item, 1);
                     }
                 }
                 else
