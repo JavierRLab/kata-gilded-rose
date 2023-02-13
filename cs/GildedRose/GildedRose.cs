@@ -22,7 +22,7 @@ namespace GildedRoseKata
                         UpdateBrieQuality(item);
                         break;
                     case "Backstage passes to a TAFKAL80ETC concert":
-                        UpdateTicketQuality(item);
+                        // UpdateTicketQuality(item);
                         break;
                     default:
                         UpdateNormalItemQuality(item);
@@ -38,7 +38,7 @@ namespace GildedRoseKata
         {
             DecreaseQuality(item, 1);
 
-            if (IsExpired(item, 1))
+            if (IsExpired(item))
             {
                 DecreaseQuality(item, 1);
             }
@@ -46,38 +46,36 @@ namespace GildedRoseKata
 
         private void UpdateTicketQuality(Item item)
         {
-            if (IsExpired(item, 1))
-            {
-                DecreaseQuality(item, item.Quality);
-            }
-            else
+            IncreaseQuality(item, 1);
+
+            if (item.SellIn < 11)
             {
                 IncreaseQuality(item, 1);
+            }
 
-                if (IsExpired(item, 11))
-                {
-                    IncreaseQuality(item, 1);
-                }
-
-                if (IsExpired(item, 6))
-                {
-                    IncreaseQuality(item, 1);
-                }
+            if (item.SellIn < 6)
+            {
+                IncreaseQuality(item, 1);
+            }
+            
+            if (IsExpired(item))
+            {
+                DecreaseQuality(item, item.Quality);
             }
         }
 
         private void UpdateBrieQuality(Item item)
         {
             IncreaseQuality(item, 1);
-            if (IsExpired(item, 1))
+            if (IsExpired(item))
             {
                 IncreaseQuality(item, 1);
             }
         }
 
-        private static bool IsExpired(Item item, int daysLeft)
+        private static bool IsExpired(Item item)
         {
-            return item.SellIn < daysLeft;
+            return item.SellIn < 1;
         }
 
         private bool IsNotMinimumQuality(Item item)
