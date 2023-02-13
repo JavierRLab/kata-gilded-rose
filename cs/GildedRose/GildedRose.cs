@@ -23,7 +23,6 @@ namespace GildedRoseKata
                     IncreaseQuality(item, 1);
                 else if (IsConcertTicket(item))
                 {
-                    
                     IncreaseQuality(item, 1);
                     if (item.SellIn < 11)
                     {
@@ -42,22 +41,20 @@ namespace GildedRoseKata
 
                 DecreaseSellIn(item);
 
+
                 if (item.SellIn < 0)
                 {
                     if (IsBrie(item))
                     {
                         IncreaseQuality(item, 1);
                     }
+                    else if (IsConcertTicket(item))
+                    {
+                        DecreaseQuality(item, item.Quality);
+                    }
                     else
                     {
-                        if (IsConcertTicket(item))
-                        {
-                            DecreaseQuality(item, item.Quality);
-                        }
-                        else
-                        {
-                            DecreaseQuality(item, 1);
-                        }
+                        DecreaseQuality(item, 1);
                     }
                 }
             }
