@@ -16,13 +16,7 @@ namespace GildedRoseKata
             {
                 if (IsNotBrie(item) && !IsConcertTicket(item))
                 {
-                    if (IsNotMinimumQuality(item))
-                    {
-                        if (IsNotLegendary(item))
-                        {
                             DecreaseQuality(item, 1);
-                        }
-                    }
                 }
                 else
                 {
@@ -54,13 +48,7 @@ namespace GildedRoseKata
                     {
                         if (!IsConcertTicket(item))
                         {
-                            if (IsNotMinimumQuality(item))
-                            {
-                                if (IsNotLegendary(item))
-                                {
                                     DecreaseQuality(item, 1);
-                                }
-                            }
                         }
                         else
                         {
@@ -107,7 +95,13 @@ namespace GildedRoseKata
 
         private void DecreaseQuality(Item item, int itemQuality)
         {
-            item.Quality -= itemQuality;
+            if (IsNotMinimumQuality(item))
+            {
+                if (IsNotLegendary(item))
+                {
+                    item.Quality -= itemQuality;
+                }
+            }
         }
 
         private void IncreaseQuality(Item item, int itemQuality)
