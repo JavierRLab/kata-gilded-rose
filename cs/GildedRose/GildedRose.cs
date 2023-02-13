@@ -30,8 +30,9 @@ namespace GildedRoseKata
                     {
                         IncreaseQuality(item);
 
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (IsConcertTicket(item))
                         {
+                            
                             if (item.SellIn < 11)
                             {
                                 if (IsNotMaxQuality(item))
@@ -57,7 +58,7 @@ namespace GildedRoseKata
                 {
                     if (item.Name != "Aged Brie")
                     {
-                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (!IsConcertTicket(item))
                         {
                             if (IsNotMinimumQuality(item))
                             {
@@ -81,6 +82,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private static bool IsConcertTicket(Item item)
+        {
+            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
         }
 
         private bool IsNotMinimumQuality(Item item)
