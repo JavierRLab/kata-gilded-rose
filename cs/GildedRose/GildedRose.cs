@@ -26,7 +26,7 @@ namespace GildedRoseKata
                 }
                 else
                 {
-                    if (item.Quality < 50)
+                    if (IsNotMaxQuality(item))
                     {
                         IncreaseQuality(item);
 
@@ -34,7 +34,7 @@ namespace GildedRoseKata
                         {
                             if (item.SellIn < 11)
                             {
-                                if (item.Quality < 50)
+                                if (IsNotMaxQuality(item))
                                 {
                                     IncreaseQuality(item);
                                 }
@@ -42,7 +42,7 @@ namespace GildedRoseKata
 
                             if (item.SellIn < 6)
                             {
-                                if (item.Quality < 50)
+                                if (IsNotMaxQuality(item))
                                 {
                                     IncreaseQuality(item);
                                 }
@@ -74,13 +74,18 @@ namespace GildedRoseKata
                     }
                     else
                     {
-                        if (item.Quality < 50)
+                        if (IsNotMaxQuality(item))
                         {
                             IncreaseQuality(item);
                         }
                     }
                 }
             }
+        }
+
+        private bool IsNotMaxQuality(Item item)
+        {
+            return item.Quality < 50;
         }
 
         private void DecreaseSellIn(Item item)
