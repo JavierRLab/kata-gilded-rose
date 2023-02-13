@@ -14,6 +14,10 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
+                if (IsLegendary(item))
+                {
+                    continue;
+                }
                 if (IsBrie(item) || IsConcertTicket(item))
                 {
                     IncreaseQuality(item, 1);
@@ -81,20 +85,15 @@ namespace GildedRoseKata
 
         private void DecreaseSellIn(Item item)
         {
-            if (IsNotLegendary(item))
-            {
-                item.SellIn -= 1;
-            }
+            item.SellIn -= 1;
+            
         }
 
         private void DecreaseQuality(Item item, int itemQuality)
         {
             if (IsNotMinimumQuality(item))
             {
-                if (IsNotLegendary(item))
-                {
-                    item.Quality -= itemQuality;
-                }
+                item.Quality -= itemQuality;
             }
         }
 
@@ -106,9 +105,9 @@ namespace GildedRoseKata
             }
         }
 
-        private static bool IsNotLegendary(Item item)
+        private static bool IsLegendary(Item item)
         {
-            return item.Name != "Sulfuras, Hand of Ragnaros";
+            return item.Name == "Sulfuras, Hand of Ragnaros";
         }
     }
 }
