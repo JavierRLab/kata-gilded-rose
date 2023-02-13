@@ -21,37 +21,15 @@ namespace GildedRoseKata
 
                 if (IsBrie(item))
                 {
-                    IncreaseQuality(item, 1);
-                    if(IsSellInHasDone(item, 1))
-                        IncreaseQuality(item, 1);
-
-                    
+                    UpdateBrieQuality(item);
                 }
                 else if (IsConcertTicket(item))
                 {
-                    if (IsSellInHasDone(item, 1))
-                        DecreaseQuality(item, item.Quality);
-                    else
-                    {
-                        IncreaseQuality(item, 1);
-
-                        if (IsSellInHasDone(item, 11))
-                        {
-                            IncreaseQuality(item, 1);
-                        }
-
-                        if (IsSellInHasDone(item, 6))
-                        {
-                            IncreaseQuality(item, 1);
-                        }
-                    }
+                    UpdateTicketQuality(item);
                 }
                 else
                 {
-                    DecreaseQuality(item, 1);
-                    
-                    if(IsSellInHasDone(item, 1))
-                        DecreaseQuality(item, 1);
+                    UpdateNormalItemQuality(item);
                 }
                 
                 DecreaseSellIn(item);
@@ -59,7 +37,48 @@ namespace GildedRoseKata
             }
         }
 
-        private static bool IsSellInHasDone(Item item, int daysLeft)
+        private void UpdateNormalItemQuality(Item item)
+        {
+            DecreaseQuality(item, 1);
+
+            if (IsExpired(item, 1))
+            {
+                DecreaseQuality(item, 1);
+            }
+        }
+
+        private void UpdateTicketQuality(Item item)
+        {
+            if (IsExpired(item, 1))
+            {
+                DecreaseQuality(item, item.Quality);
+            }
+            else
+            {
+                IncreaseQuality(item, 1);
+
+                if (IsExpired(item, 11))
+                {
+                    IncreaseQuality(item, 1);
+                }
+
+                if (IsExpired(item, 6))
+                {
+                    IncreaseQuality(item, 1);
+                }
+            }
+        }
+
+        private void UpdateBrieQuality(Item item)
+        {
+            IncreaseQuality(item, 1);
+            if (IsExpired(item, 1))
+            {
+                IncreaseQuality(item, 1);
+            }
+        }
+
+        private static bool IsExpired(Item item, int daysLeft)
         {
             return item.SellIn < daysLeft;
         }
