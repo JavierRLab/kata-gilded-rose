@@ -14,7 +14,7 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (item.Name != "Aged Brie" && !IsConcertTicket(item))
+                if (IsNotBrie(item) && !IsConcertTicket(item))
                 {
                     if (IsNotMinimumQuality(item))
                     {
@@ -56,7 +56,7 @@ namespace GildedRoseKata
 
                 if (item.SellIn < 0)
                 {
-                    if (item.Name != "Aged Brie")
+                    if (IsNotBrie(item))
                     {
                         if (!IsConcertTicket(item))
                         {
@@ -82,6 +82,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private bool IsNotBrie(Item item)
+        {
+            return item.Name != "Aged Brie";
         }
 
         private static bool IsConcertTicket(Item item)
