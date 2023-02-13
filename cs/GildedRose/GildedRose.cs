@@ -16,7 +16,7 @@ namespace GildedRoseKata
             {
                 if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (item.Quality > 0)
+                    if (IsNotMinimumQuality(item))
                     {
                         if (IsNotLegendary(item))
                         {
@@ -59,7 +59,7 @@ namespace GildedRoseKata
                     {
                         if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (item.Quality > 0)
+                            if (IsNotMinimumQuality(item))
                             {
                                 if (IsNotLegendary(item))
                                 {
@@ -81,6 +81,11 @@ namespace GildedRoseKata
                     }
                 }
             }
+        }
+
+        private bool IsNotMinimumQuality(Item item)
+        {
+            return item.Quality > 0;
         }
 
         private bool IsNotMaxQuality(Item item)
