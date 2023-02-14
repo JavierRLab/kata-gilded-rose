@@ -12,78 +12,98 @@ namespace GildedRoseKata
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var item in Items)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    if (Items[i].Quality > 0)
+                    if (item.Quality > 0)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (!IsLegendary(item))
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            DecreaseQuality(item, 1);
                         }
                     }
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (item.Quality < 50)
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
+                        IncreaseQuality(item);
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (Items[i].SellIn < 11)
+                            if (item.SellIn < 11)
                             {
-                                if (Items[i].Quality < 50)
+                                if (item.Quality < 50)
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    IncreaseQuality(item);
                                 }
                             }
 
-                            if (Items[i].SellIn < 6)
+                            if (item.SellIn < 6)
                             {
-                                if (Items[i].Quality < 50)
+                                if (item.Quality < 50)
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    IncreaseQuality(item);
                                 }
                             }
                         }
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (!IsLegendary(item))
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    DecreaseSellIn(item);
                 }
 
-                if (Items[i].SellIn < 0)
+                if (item.SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (item.Name != "Aged Brie")
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
                         {
-                            if (Items[i].Quality > 0)
+                            if (item.Quality > 0)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (!IsLegendary(item))
                                 {
-                                    Items[i].Quality = Items[i].Quality - 1;
+                                    DecreaseQuality(item, 1);
                                 }
                             }
                         }
                         else
                         {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
+                            DecreaseQuality(item, item.Quality);
                         }
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (item.Quality < 50)
                         {
-                            Items[i].Quality = Items[i].Quality + 1;
+                            IncreaseQuality(item);
                         }
                     }
                 }
             }
+        }
+
+        private bool IsLegendary(Item item)
+        {
+            return item.Name == "Sulfuras, Hand of Ragnaros";
+        }
+
+        private void DecreaseSellIn(Item item)
+        {
+            item.SellIn -= 1;
+        }
+
+        private void IncreaseQuality(Item item)
+        {
+            item.Quality += 1;
+        }
+
+        private void DecreaseQuality(Item item, int itemQuality)
+        {
+            item.Quality -= itemQuality;
         }
     }
 }
