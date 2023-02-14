@@ -14,23 +14,17 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (item.Quality > 0)
-                    {
-                        if (!IsLegendary(item))
-                        {
-                            DecreaseQuality(item, 1);
-                        }
-                    }
-                }
-                else
+                if (IsLegendary(item))
+                    continue;
+
+
+                if (IsBrie(item) || IsConcertTicket(item))
                 {
                     if (item.Quality < 50)
                     {
                         IncreaseQuality(item);
 
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (IsConcertTicket(item))
                         {
                             if (item.SellIn < 11)
                             {
@@ -50,40 +44,51 @@ namespace GildedRoseKata
                         }
                     }
                 }
-
-                if (!IsLegendary(item))
+                else
                 {
-                    DecreaseSellIn(item);
+                    if (item.Quality > 0)
+                    {
+                        DecreaseQuality(item, 1);
+                    }
                 }
+
+                DecreaseSellIn(item);
 
                 if (item.SellIn < 0)
                 {
-                    if (item.Name != "Aged Brie")
-                    {
-                        if (item.Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (item.Quality > 0)
-                            {
-                                if (!IsLegendary(item))
-                                {
-                                    DecreaseQuality(item, 1);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            DecreaseQuality(item, item.Quality);
-                        }
-                    }
-                    else
+                    if (IsBrie(item))
                     {
                         if (item.Quality < 50)
                         {
                             IncreaseQuality(item);
                         }
                     }
+                    else
+                    {
+                        if (IsConcertTicket(item))
+                        {
+                            DecreaseQuality(item, item.Quality);
+                        }
+                        else
+                        {
+                            if (item.Quality > 0)
+                            {
+                                DecreaseQuality(item, 1);
+                            }
+                        }
+                    }
                 }
             }
+        }
+
+        private bool IsConcertTicket(Item item)
+        {
+            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
+        }
+
+        private bool IsBrie(Item item)
+        {
+            return item.Name == "Aged Brie";
         }
 
         private bool IsLegendary(Item item)
