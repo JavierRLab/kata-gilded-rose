@@ -17,50 +17,46 @@ namespace GildedRoseKata
                 if (IsLegendary(item))
                     continue;
 
-
-                if (IsBrie(item) || IsConcertTicket(item))
+                if (IsBrie(item))
                 {
                     IncreaseQuality(item);
-
-                    if (IsConcertTicket(item))
+                    
+                    if(IsExpired(item))
+                        IncreaseQuality(item);
+                }
+                else if (IsConcertTicket(item))
+                {
+                    IncreaseQuality(item);
+                    
+                    if (item.SellIn < 11)
                     {
-                        if (item.SellIn < 11)
-                        {
-                            IncreaseQuality(item);
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            IncreaseQuality(item);
-                        }
+                        IncreaseQuality(item);
                     }
+
+                    if (item.SellIn < 6)
+                    {
+                        IncreaseQuality(item);
+                    }
+                    
+                    if(IsExpired(item))
+                        DecreaseQuality(item, item.Quality);
+                    
                 }
                 else
                 {
                     DecreaseQuality(item, 1);
+                    
+                    if(IsExpired(item))
+                        DecreaseQuality(item, 1);
                 }
 
                 DecreaseSellIn(item);
-
-                if (item.SellIn < 0)
-                {
-                    if (IsBrie(item))
-                    {
-                        IncreaseQuality(item);
-                    }
-                    else
-                    {
-                        if (IsConcertTicket(item))
-                        {
-                            DecreaseQuality(item, item.Quality);
-                        }
-                        else
-                        {
-                            DecreaseQuality(item, 1);
-                        }
-                    }
-                }
             }
+        }
+
+        private bool IsExpired(Item item)
+        {
+            return item.SellIn < 1;
         }
 
         private bool IsConcertTicket(Item item)
