@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GildedRose", "GildedRose\Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GildedRoseTests", "GildedRoseTests\GildedRoseTests.csproj", "{CB6715CE-A283-4C70-9C1B-F58822077731}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnit.Coverlet.Collector", "XUnit.Coverlet.Collector\XUnit.Coverlet.Collector.csproj", "{97DFA651-8EBC-4992-BD3B-78AC45F24545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnit.Coverlet.MSBuild", "XUnit.Coverlet.MSBuild\XUnit.Coverlet.MSBuild.csproj", "{FC55B6FA-41E6-4F77-A57D-39E7D42F6213}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{CB6715CE-A283-4C70-9C1B-F58822077731}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB6715CE-A283-4C70-9C1B-F58822077731}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB6715CE-A283-4C70-9C1B-F58822077731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DFA651-8EBC-4992-BD3B-78AC45F24545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DFA651-8EBC-4992-BD3B-78AC45F24545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DFA651-8EBC-4992-BD3B-78AC45F24545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DFA651-8EBC-4992-BD3B-78AC45F24545}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC55B6FA-41E6-4F77-A57D-39E7D42F6213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC55B6FA-41E6-4F77-A57D-39E7D42F6213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC55B6FA-41E6-4F77-A57D-39E7D42F6213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC55B6FA-41E6-4F77-A57D-39E7D42F6213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

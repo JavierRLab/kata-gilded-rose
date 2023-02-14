@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using GildedRoseKata;
 using Xunit;
 
-namespace GildedRoseTests;
+namespace XUnit.Coverlet;
 
 public class CharacterizationGildedRose_Tests
 {
