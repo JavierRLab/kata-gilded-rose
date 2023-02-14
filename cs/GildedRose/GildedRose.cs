@@ -14,20 +14,19 @@ namespace GildedRoseKata
         {
             foreach (var item in Items)
             {
-                if (IsLegendary(item))
-                    continue;
-
-                if (IsBrie(item))
+                switch (item.Name)
                 {
-                    UpdateBrieQuality(item);
-                }
-                else if (IsConcertTicket(item))
-                {
-                    UpdateConcertTicketQuality(item);
-                }
-                else
-                {
-                    UpdateNormalItemQuality(item);
+                    case "Sulfuras, Hand of Ragnaros":
+                        continue;
+                    case "Aged Brie":
+                        UpdateBrieQuality(item);
+                        break;
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        UpdateConcertTicketQuality(item);
+                        break;
+                    default:
+                        UpdateNormalItemQuality(item);
+                        break;
                 }
 
                 DecreaseSellIn(item);
@@ -67,21 +66,6 @@ namespace GildedRoseKata
         private bool IsExpired(Item item)
         {
             return item.SellIn < 1;
-        }
-
-        private bool IsConcertTicket(Item item)
-        {
-            return item.Name == "Backstage passes to a TAFKAL80ETC concert";
-        }
-
-        private bool IsBrie(Item item)
-        {
-            return item.Name == "Aged Brie";
-        }
-
-        private bool IsLegendary(Item item)
-        {
-            return item.Name == "Sulfuras, Hand of Ragnaros";
         }
 
         private void DecreaseSellIn(Item item)
