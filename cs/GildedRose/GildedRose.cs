@@ -34,13 +34,10 @@ namespace GildedRoseKata
                             IncreaseQuality(item);
                         }
                     }
-                    }
+                }
                 else
                 {
-                    if (item.Quality > 0)
-                    {
-                        DecreaseQuality(item, 1);
-                    }
+                    DecreaseQuality(item, 1);
                 }
 
                 DecreaseSellIn(item);
@@ -59,10 +56,7 @@ namespace GildedRoseKata
                         }
                         else
                         {
-                            if (item.Quality > 0)
-                            {
-                                DecreaseQuality(item, 1);
-                            }
+                            DecreaseQuality(item, 1);
                         }
                     }
                 }
@@ -99,7 +93,10 @@ namespace GildedRoseKata
 
         private void DecreaseQuality(Item item, int itemQuality)
         {
-            item.Quality -= itemQuality;
+            if (item.Quality > 0)
+            {
+                item.Quality -= itemQuality;
+            }
         }
     }
 }
