@@ -20,30 +20,21 @@ namespace GildedRoseKata
 
                 if (IsBrie(item) || IsConcertTicket(item))
                 {
-                    if (item.Quality < 50)
+                    IncreaseQuality(item);
+
+                    if (IsConcertTicket(item))
                     {
-                        IncreaseQuality(item);
-
-                        if (IsConcertTicket(item))
+                        if (item.SellIn < 11)
                         {
-                            if (item.SellIn < 11)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    IncreaseQuality(item);
-                                }
-                            }
+                            IncreaseQuality(item);
+                        }
 
-                            if (item.SellIn < 6)
-                            {
-                                if (item.Quality < 50)
-                                {
-                                    IncreaseQuality(item);
-                                }
-                            }
+                        if (item.SellIn < 6)
+                        {
+                            IncreaseQuality(item);
                         }
                     }
-                }
+                    }
                 else
                 {
                     if (item.Quality > 0)
@@ -58,10 +49,7 @@ namespace GildedRoseKata
                 {
                     if (IsBrie(item))
                     {
-                        if (item.Quality < 50)
-                        {
-                            IncreaseQuality(item);
-                        }
+                        IncreaseQuality(item);
                     }
                     else
                     {
@@ -103,7 +91,10 @@ namespace GildedRoseKata
 
         private void IncreaseQuality(Item item)
         {
-            item.Quality += 1;
+            if (item.Quality < 50)
+            {
+                item.Quality += 1;
+            }
         }
 
         private void DecreaseQuality(Item item, int itemQuality)
