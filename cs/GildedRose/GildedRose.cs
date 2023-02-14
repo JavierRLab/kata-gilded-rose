@@ -19,39 +19,49 @@ namespace GildedRoseKata
 
                 if (IsBrie(item))
                 {
-                    IncreaseQuality(item);
-                    
-                    if(IsExpired(item))
-                        IncreaseQuality(item);
+                    UpdateBrieQuality(item);
                 }
                 else if (IsConcertTicket(item))
                 {
-                    IncreaseQuality(item);
-                    
-                    if (item.SellIn < 11)
-                    {
-                        IncreaseQuality(item);
-                    }
-
-                    if (item.SellIn < 6)
-                    {
-                        IncreaseQuality(item);
-                    }
-                    
-                    if(IsExpired(item))
-                        DecreaseQuality(item, item.Quality);
-                    
+                    UpdateConcertTicketQuality(item);
                 }
                 else
                 {
-                    DecreaseQuality(item, 1);
-                    
-                    if(IsExpired(item))
-                        DecreaseQuality(item, 1);
+                    UpdateNormalItemQuality(item);
                 }
 
                 DecreaseSellIn(item);
             }
+        }
+
+        private void UpdateNormalItemQuality(Item item)
+        {
+            DecreaseQuality(item, 1);
+
+            if (IsExpired(item))
+                DecreaseQuality(item, 1);
+        }
+
+        private void UpdateConcertTicketQuality(Item item)
+        {
+            IncreaseQuality(item);
+
+            if (item.SellIn < 11)
+                IncreaseQuality(item);
+
+            if (item.SellIn < 6)
+                IncreaseQuality(item);
+
+            if (IsExpired(item))
+                DecreaseQuality(item, item.Quality);
+        }
+
+        private void UpdateBrieQuality(Item item)
+        {
+            IncreaseQuality(item);
+
+            if (IsExpired(item))
+                IncreaseQuality(item);
         }
 
         private bool IsExpired(Item item)
