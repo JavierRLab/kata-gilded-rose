@@ -57,6 +57,18 @@ public class CharacterizationGildedRose_Tests
         AssertItem(itemAgedBrie, 4, 5);
     }
     
+    [Fact(DisplayName = "Aged Brie with passed sellIn actually increases in Quality the older it gets")]
+    public void AgedBrieWithPassedSellInIncreaseQuality()
+    {
+        Item itemAgedBrie = new Item {Name = "Aged Brie", SellIn = -4, Quality = 4 };
+        IList<Item> Items = new List<Item> { itemAgedBrie };
+        GildedRose shop = new GildedRose(Items);
+        
+        shop.UpdateQuality();
+        
+        AssertItem(itemAgedBrie, -5, 6);
+    }
+    
     [Fact(DisplayName = "The Quality of an item is never more than 50")]
     public void QualityOfItemIsNeverMoreThen50()
     {
