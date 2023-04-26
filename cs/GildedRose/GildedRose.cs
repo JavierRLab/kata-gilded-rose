@@ -22,7 +22,7 @@ namespace GildedRoseKata
                         UpdateBrieQuality(item);
                         break;
                     case "Backstage passes to a TAFKAL80ETC concert":
-                        // UpdateTicketQuality(item);
+                        UpdateTicketQuality(item);
                         break;
                     default:
                         UpdateNormalItemQuality(item);

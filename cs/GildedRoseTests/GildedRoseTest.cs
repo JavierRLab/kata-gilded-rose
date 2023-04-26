@@ -76,6 +76,10 @@ namespace GildedRoseTests
                 }
             }
 
+            for (int i = 0; i < actualLog.Count; i++)
+            {
+                Assert.Equal(expectedLog[i], actualLog[i]);
+            }
             Assert.Equal(expectedLog, actualLog);
 
         }
